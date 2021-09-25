@@ -75,4 +75,14 @@ Running teh following command to generate file part-1-output
 curl -o ./part-1-output http://localhost:9393/raw
 ```
 
+PART 2
+Create docker-compose.yaml file
+```
+vi docker-compose.yaml
+```
+Run the docker-compose file
+```
+docker-compose up -d
+```
+
 
