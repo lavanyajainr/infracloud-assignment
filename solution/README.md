@@ -1,3 +1,10 @@
+PART 1
+Pull docker images
+```
+docker pull infracloudio/csvserver:latest
+docker pull prom/prometheus:v2.22.0
+```
+
 Run container for first time
 ```
 docker run --name infracloud -d infracloudio/csvserver
@@ -8,6 +15,11 @@ Check docker logs for failure
 docker logs -f infracloud
 ```
  output: error while reading the file "/csvserver/inputdata": open /csvserver/inputdata: no such file or directory 
+
+Delete the  container (NOTE: delete infracloud if you are running multiple docker run command)
+```
+docker rm -f infracloud
+```
 
 Write bash script to generate inputFile and other required content
 ```
@@ -76,13 +88,27 @@ curl -o ./part-1-output http://localhost:9393/raw
 ```
 
 PART 2
-Create docker-compose.yaml file
+Create docker-compose.yaml file for running application
 ```
 vi docker-compose.yaml
 ```
 Run the docker-compose file
 ```
 docker-compose up -d
+```
+
+PART 3
+Add Prometheus container to docker compose file
+ Mounting the prometheus.yml file from current workimg directory.
+ New yml file has configuration to collect data from our application at ```infracloud:9300/metrics```.
+
+Prometheus can be accessed at
+```
+http://localhost:9090
+```
+below command shows a straight line graph with value 10 for the record csvserver_records
+```
+http://localhost:9090/graph?g0.range_input=1h&g0.expr=csvserver_records&g0.tab=0
 ```
 
 
