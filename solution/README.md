@@ -70,5 +70,9 @@ Hit the browser
 ```
 http://localhost:9393/
 ```
+Running teh following command to generate file part-1-output
+```
+curl -o ./part-1-output http://localhost:9393/raw
+```
 
 
